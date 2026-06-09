@@ -1,10 +1,5 @@
-"""
-tests/test_smoke.py
-Tests de démarrage — vérifient que le projet Django se charge correctement.
-Ces tests seront enrichis au fur et à mesure du développement des modules.
-"""
+"""Tests de démarrage du projet Django."""
 
-import pytest
 from django.test import TestCase
 
 
@@ -15,7 +10,8 @@ class TestDjangoSetup(TestCase):
         """Les settings Django sont correctement chargés."""
         from django.conf import settings
         self.assertTrue(hasattr(settings, 'INSTALLED_APPS'))
-        self.assertIn('reconciliation', settings.INSTALLED_APPS)
+        self.assertIn('apps.core', settings.INSTALLED_APPS)
+        self.assertIn('apps.matching', settings.INSTALLED_APPS)
 
     def test_database_connection(self):
         """La connexion à la base de données fonctionne."""
@@ -31,28 +27,28 @@ class TestProjectStructure(TestCase):
 
     def test_import_connectors(self):
         """Le package connectors est importable."""
-        import reconciliation.connectors  # noqa: F401
+        import apps.connectors  # noqa: F401
 
     def test_import_engine(self):
         """Le package engine est importable."""
-        import reconciliation.engine  # noqa: F401
+        import apps.matching.engine  # noqa: F401
 
     def test_import_batch(self):
         """Le package batch est importable."""
-        import reconciliation.batch  # noqa: F401
+        import apps.batch  # noqa: F401
 
     def test_import_models(self):
         """Le package models est importable."""
-        import reconciliation.models  # noqa: F401
+        import apps.core.models  # noqa: F401
 
     def test_import_api(self):
         """Le package api est importable."""
-        import reconciliation.api  # noqa: F401
+        import apps.api  # noqa: F401
 
     def test_import_notifications(self):
         """Le package notifications est importable."""
-        import reconciliation.notifications  # noqa: F401
+        import apps.notifications  # noqa: F401
 
     def test_import_reports(self):
         """Le package reports est importable."""
-        import reconciliation.reports  # noqa: F401
+        import apps.reports  # noqa: F401
